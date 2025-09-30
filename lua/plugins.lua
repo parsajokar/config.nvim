@@ -92,12 +92,9 @@ return {
         },
 
         config = function()
-            local lspconfig = require("lspconfig")
-            local capabilities = require("blink.cmp").get_lsp_capabilities();
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-            lspconfig.pyright.setup({capabilities = capabilities})
-
-            lspconfig.clangd.setup({
+            vim.lsp.config["clangd"] = {
                 capabilities = capabilities,
                 cmd = {
                     "clangd",
@@ -105,9 +102,14 @@ return {
                     "--clang-tidy",
                     "--header-insertion=never"
                 }
-            })
+            }
+            vim.lsp.enable("clangd")
 
-            lspconfig.rust_analyzer.setup({capabilities = capabilities})
+            vim.lsp.config["pyright"] = {capabilities = capabilities}
+            vim.lsp.enable("pyright")
+
+            vim.lsp.config["rust_analyzer"] = {capabilities = capabilities}
+            vim.lsp.enable("rust_analyzer")
         end
     }
 }
