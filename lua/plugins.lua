@@ -25,7 +25,24 @@ return {
             require("nvim-treesitter.install").prefer_git = false
             require("nvim-treesitter.install").compilers = {"gcc", "clang"}
             require("nvim-treesitter.configs").setup({
-                ensure_installed = {"lua", "python", "vim", "vimdoc", "commonlisp", "make", "cmake", "c", "cpp", "rust", "asm"},
+                ensure_installed = {
+                    "vim",
+                    "vimdoc",
+                    "lua",
+                    "python",
+                    "make",
+                    "cmake",
+                    "c",
+                    "cpp",
+                    "rust",
+                    "asm",
+                    "commonlisp",
+                    "racket",
+                    "html",
+                    "css",
+                    "javascript",
+                    "typescript"
+                },
                 highlight = {enable = true, additional_vim_regex_highlighting = false}
             })
         end
@@ -62,54 +79,6 @@ return {
 
         config = function()
             require("oil").setup()
-        end
-    },
-
-    -- AUTOCOMPLETE
-    {
-        "saghen/blink.cmp",
-        version = "*",
-
-        dependencies = {"rafamadriz/friendly-snippets"},
-
-        opts = {
-            keymap = {preset = "enter"},
-            cmdline = {enabled = false},
-            appearance = {
-                nerd_font_variant = "normal"
-            }
-        },
-        opts_extend = {"sources.default"}
-    },
-
-    -- NATIVE LSP SUPPORT
-    {
-        "neovim/nvim-lspconfig",
-        lazy = false,
-
-        dependencies = {
-            "saghen/blink.cmp",
-        },
-
-        config = function()
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-            vim.lsp.config["clangd"] = {
-                capabilities = capabilities,
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=never"
-                }
-            }
-            vim.lsp.enable("clangd")
-
-            vim.lsp.config["pyright"] = {capabilities = capabilities}
-            vim.lsp.enable("pyright")
-
-            vim.lsp.config["rust_analyzer"] = {capabilities = capabilities}
-            vim.lsp.enable("rust_analyzer")
         end
     }
 }
