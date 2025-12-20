@@ -6,6 +6,9 @@ map("n", "<Leader>gf", "<CMD>Telescope find_files<CR>") -- GO TO FILE
 map("n", "<Leader>gs", "<CMD>Telescope live_grep<CR>") -- GO TO SYMBOL
 map("n", "<Leader>gb", "<CMD>Telescope buffers<CR>") -- GO TO BUFFER
 
+map("n", "<Leader>ge", "<CMD>Telescope diagnostics<CR>") -- GO TO ERRORS
+map("n", "<Leader>gd", "<CMD>lua vim.lsp.buf.definition()<CR>") -- GO TO DEFINITION
+
 map("n", "-", "<CMD>Oil<CR>")
 
 -- Fix n and N. Keeping cursor in center
