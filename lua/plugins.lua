@@ -1,15 +1,68 @@
 local g = vim.g
 local cmd = vim.cmd
 
+vim.api.nvim_create_user_command('ChangeDirectory', function()
+    require('telescope.builtin').find_files({
+        prompt_title = "Select Directory",
+        cwd = vim.fn.expand("~/dev"),
+        find_command = { "fd", "--type", "d", "--max-depth", "3" },
+        attach_mappings = function(prompt_bufnr, map)
+            local actions = require('telescope.actions')
+            local action_state = require('telescope.actions.state')
+            actions.select_default:replace(function()
+                local selection = action_state.get_selected_entry()
+                actions.close(prompt_bufnr)
+                vim.cmd('cd ' .. selection.path)
+                vim.cmd('Oil ' .. selection.path)
+            end)
+            return true
+        end,
+    })
+end, {})
+
 return {
+    -- DASHBOARD
+    {
+        "nvimdev/dashboard-nvim",
+        event = "VimEnter",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        },
+
+        config = function()
+            require("dashboard").setup({
+                theme = "doom",
+                config = {
+                    center = {
+                        {
+                            icon = "  ",
+                            desc = "Open Directory",
+                            key = "d",
+                            key_format = " %s",
+                            action = "ChangeDirectory"
+                        },
+                        {
+                            icon = "  ",
+                            desc = "Open Configuration",
+                            key = "c",
+                            key_format = " %s",
+                            action = "e ~/.config/nvim/"
+                        }
+                    }
+                }
+            })
+        end
+    },
+
     -- COLORSCHEME
     {
-        "datsfilipe/vesper.nvim",
+        "sainnhe/gruvbox-material",
         lazy = false,
         priority = 1000,
 
         config = function()
-            cmd.colorscheme("vesper")
+            g.gruvbox_material_enable_italic = true
+            cmd.colorscheme("gruvbox-material")
         end
     },
 
@@ -55,23 +108,13 @@ return {
         }
     },
 
-    -- ICONS
-    {
-        "echasnovski/mini.icons",
-
-        config = function()
-            require("mini.icons").setup()
-            require("mini.icons").mock_nvim_web_devicons()
-        end
-    },
-
     -- FILE EXPLORER
     {
         "stevearc/oil.nvim",
         lazy = false,
 
         dependencies = {
-            "echasnovski/mini.icons"
+            "nvim-tree/nvim-web-devicons"
         },
 
         config = function()
@@ -79,19 +122,22 @@ return {
         end
     },
 
-    -- LSP INSTALLER
+    --BUFFERLINE
     {
-        "mason-org/mason.nvim",
-        lazy = false,
+        "akinsho/bufferline.nvim",
+        version = "*",
+
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        },
 
         config = function()
-            require("mason").setup({
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗"
-                    }
+            require("bufferline").setup({
+                options = {
+                    separator_style = "slant",
+                    diagnostics = "nvim_lsp",
+                    show_buffer_close_icons = false,
+                    show_close_icon = false,
                 }
             })
         end
@@ -100,7 +146,7 @@ return {
     -- AUTOCOMPLETE
     {
         "saghen/blink.cmp",
-        version = "*",
+        version = "1.*",
 
         dependencies = {"rafamadriz/friendly-snippets"},
 
@@ -109,9 +155,30 @@ return {
             cmdline = {enabled = false},
             appearance = {
                 nerd_font_variant = "normal"
+            },
+            completion = {
+                ghost_text = {
+                    enabled = true
+                }
             }
         },
         opts_extend = {"sources.default"}
+    },
+
+    -- FORMATTER
+    {
+        "stevearc/conform.nvim",
+
+        config = function()
+            require("conform").setup({
+                formatters_by_ft = {
+                    c = {"clang-format"},
+                    cpp = {"clang-format"},
+                    python = {"black"},
+                    rust = {"rustfmt"}
+                },
+            })
+        end
     },
 
     -- NATIVE LSP SUPPORT
@@ -120,7 +187,6 @@ return {
         lazy = false,
 
         dependencies = {
-            "mason-org/mason.nvim",
             "saghen/blink.cmp"
         },
 
