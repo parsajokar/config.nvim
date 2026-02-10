@@ -18,7 +18,6 @@ require("lazy").setup(
     {change_detection = {notify = false}}
 )
 
-require("usercmd")
 require("autocmd")
 require("keybinds")
 

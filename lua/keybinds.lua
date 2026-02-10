@@ -12,6 +12,8 @@ map("n", "<Leader>gf", telescope_builtin.find_files, "Go to file") -- GO TO FILE
 map("n", "<Leader>gs", telescope_builtin.live_grep, "Go to symbol") -- GO TO SYMBOL
 map("n", "<Leader>gb", telescope_builtin.buffers, "Go to buffer") -- GO TO BUFFER
 
+map("n", "<Leader>gp", require("telescope").extensions.project.project, "Go to project") -- GO TO PROJECT
+
 map("n", "<Leader>ge", telescope_builtin.diagnostics, "Go to diagnostics") -- GO TO ERRORS
 map("n", "<Leader>gd", vim.lsp.buf.definition, "Go to definition") -- GO TO DEFINITION
 

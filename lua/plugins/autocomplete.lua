@@ -31,10 +31,17 @@ return {
         },
 
         config = function()
-            vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
-            vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
-            vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
-            vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+            vim.diagnostic.config({
+                signs = { 
+                    active = true,
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN]  = "",
+                        [vim.diagnostic.severity.HINT]  = "󰟃",
+                        [vim.diagnostic.severity.INFO]  = ""
+                    }
+                }
+            })
 
             local capabilities = require("blink.cmp").get_lsp_capabilities()
             local lsp_list = require("specification").lsp_list
