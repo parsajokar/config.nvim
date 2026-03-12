@@ -13,6 +13,13 @@ return {
                     header = require("specification").dashboard_header,
                     center = {
                         {
+                            icon = "  ",
+                            desc = "Change Directory",
+                            key = "d",
+                            key_format = " %s",
+                            action = "ChangeDirectory"
+                        },
+                        {
                             icon = "  ",
                             desc = "Open Project Manager",
                             key = "p",
@@ -20,7 +27,7 @@ return {
                             action = "lua require(\"telescope\").extensions.project.project()"
                         },
                         {
-                            icon = "  ",
+                            icon = "  ",
                             desc = "Edit Configuration",
                             key = "c",
                             key_format = " %s",

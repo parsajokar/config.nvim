@@ -19,6 +19,7 @@ require("lazy").setup(
 )
 
 require("autocmd")
+require("usercmd")
 require("keybinds")
 
 if vim.g.neovide then
