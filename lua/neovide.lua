@@ -1,4 +1,4 @@
-vim.o.guifont = "BlexMono Nerd Font:h12"
+vim.o.guifont = "JetBrainsMono Nerd Font:h9"
 
 vim.g.neovide_cursor_animation_length = 0.075
 vim.g.neovide_cursor_short_animation_length = 0.025

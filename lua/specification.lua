@@ -1,4 +1,6 @@
 return {
+    workspace = os.getenv("WORKSPACE"),
+
     transparent_mode = true,
 
     treesitter_list = {
