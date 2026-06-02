@@ -1,5 +1,6 @@
 return {
     workspace = os.getenv("WORKSPACE"),
+    config = "~/.config/nvim",
 
     transparent_mode = true,
 

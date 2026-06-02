@@ -13,10 +13,16 @@
 
 ## Installation
 
-Clone this repository into your Neovim configuration directory:
-
+### Linux/MacOS
 ```bash
 git clone https://github.com/parsajokar/config.nvim ~/.config/nvim
+```
+
+### Windows
+```pwsh
+git clone https://github.com/parsajokar/config.nvim ~/AppData/Local/nvim
+cd ~/AppData/Local/nvim
+git switch windows
 ```
 
 Make sure to run this to see if everything is running properly:

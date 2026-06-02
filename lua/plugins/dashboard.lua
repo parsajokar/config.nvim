@@ -31,7 +31,7 @@ return {
                             desc = "Edit Configuration",
                             key = "c",
                             key_format = " %s",
-                            action = "e ~/.config/nvim/"
+                            action = "e " .. require("specification").config
                         }
                     },
                     footer = {
