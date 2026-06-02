@@ -1,6 +1,6 @@
 return {
     workspace = "~/dev/",
-    config = "~/.config/nvim/",
+    config = "~/AppData/Local/nvim/",
 
     transparent_mode = true,
 
