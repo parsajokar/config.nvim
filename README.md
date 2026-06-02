@@ -19,7 +19,7 @@ git clone https://github.com/parsajokar/config.nvim ~/.config/nvim
 ```
 
 ### Windows
-```pwsh
+```bash
 git clone https://github.com/parsajokar/config.nvim ~/AppData/Local/nvim
 cd ~/AppData/Local/nvim
 git switch windows
